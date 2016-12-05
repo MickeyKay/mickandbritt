@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mick &amp; Britt</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+	<meta name="robots" content="noindex, follow">
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+	<link href="https://fonts.googleapis.com/css?family=Lily+Script+One|Poiret+One" rel="stylesheet">
+  </head>
+  <body>
+	<div id="main-image-wrap">
+		<div class="heading-wrap">
+			<h3>Join us in</h3>
+			<h1>Hawaii</h1>
+		</div>
+		<a href="#" class="arrows floating" onclick="$('html,body').animate({scrollTop: jQuery( '#info' ).offset().top }, 1000 );">
+			<svg class="arrows floating">
+			<path d="M 0,0 L 12,12 L 24,0"></path>
+			</svg>
+		</a>
+	</div>
+	<div id="info">
+		<h2>Save the date</h2>
+		<h3>Mick &amp; Britt are getting married!</h3>
+		<h4>When:</h4>
+		<p>Saturday, September 16, 2017
+		<small>(with festivities & events September 13 - 20)</small></p>
+		<h4>Where:</h4>
+		<p>Kona, The Big Island of Hawaii</p>
+		<h5>More details to come. . .</h5>
+		<a href="#" class="arrows floating" onclick="$('html,body').animate({scrollTop: jQuery( '#map' ).offset().top }, 1000 );">
+			<svg class="arrows floating">
+			<path d="M 0,0 L 12,12 L 24,0"></path>
+			</svg>
+		</a>
+	</div>
+    <div id="map"></div>
+    <script>
+    	var markers = [];
+    	function initMap() {
+
+	        // Create a new StyledMapType object, passing it an array of styles,
+	        // and the name to be displayed on the map type control.
+	        var styledMapType = new google.maps.StyledMapType(
+	        	[
+	        	{
+	        		"featureType": "all",
+	        		"elementType": "geometry",
+	        		"stylers": [
+	        		{
+	        			"color": "#0e406a"
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "all",
+	        		"elementType": "labels.text.fill",
+	        		"stylers": [
+	        		{
+	        			"gamma": 0.01
+	        		},
+	        		{
+	        			"lightness": 20
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "all",
+	        		"elementType": "labels.text.stroke",
+	        		"stylers": [
+	        		{
+	        			"saturation": -31
+	        		},
+	        		{
+	        			"lightness": -33
+	        		},
+	        		{
+	        			"weight": 2
+	        		},
+	        		{
+	        			"gamma": 0.8
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "all",
+	        		"elementType": "labels.icon",
+	        		"stylers": [
+	        		{
+	        			"visibility": "off"
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "administrative",
+	        		"elementType": "all",
+	        		"stylers": [
+	        		{
+	        			"visibility": "off"
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "administrative",
+	        		"elementType": "geometry.fill",
+	        		"stylers": [
+	        		{
+	        			"visibility": "off"
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "administrative",
+	        		"elementType": "geometry.stroke",
+	        		"stylers": [
+	        		{
+	        			"visibility": "off"
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "administrative",
+	        		"elementType": "labels",
+	        		"stylers": [
+	        		{
+	        			"visibility": "off"
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "administrative.country",
+	        		"elementType": "all",
+	        		"stylers": [
+	        		{
+	        			"visibility": "off"
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "administrative.province",
+	        		"elementType": "all",
+	        		"stylers": [
+	        		{
+	        			"visibility": "off"
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "administrative.locality",
+	        		"elementType": "all",
+	        		"stylers": [
+	        		{
+	        			"visibility": "off"
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "administrative.neighborhood",
+	        		"elementType": "all",
+	        		"stylers": [
+	        		{
+	        			"visibility": "off"
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "administrative.land_parcel",
+	        		"elementType": "all",
+	        		"stylers": [
+	        		{
+	        			"visibility": "off"
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "landscape",
+	        		"elementType": "all",
+	        		"stylers": [
+	        		{
+	        			"visibility": "on"
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "landscape",
+	        		"elementType": "geometry",
+	        		"stylers": [
+	        		{
+	        			"lightness": 30
+	        		},
+	        		{
+	        			"saturation": 30
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "landscape",
+	        		"elementType": "geometry.fill",
+	        		"stylers": [
+	        		{
+	        			"color": "#f8d24a"
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "landscape",
+	        		"elementType": "labels.text",
+	        		"stylers": [
+	        		{
+	        			"visibility": "off"
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "landscape",
+	        		"elementType": "labels.text.fill",
+	        		"stylers": [
+	        		{
+	        			"visibility": "off"
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "landscape",
+	        		"elementType": "labels.text.stroke",
+	        		"stylers": [
+	        		{
+	        			"visibility": "off"
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "landscape.natural",
+	        		"elementType": "labels.text",
+	        		"stylers": [
+	        		{
+	        			"visibility": "simplified"
+	        		},
+	        		{
+	        			"saturation": "94"
+	        		},
+	        		{
+	        			"color": "#0A3F6C"
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "poi",
+	        		"elementType": "all",
+	        		"stylers": [
+	        		{
+	        			"visibility": "off"
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "poi",
+	        		"elementType": "geometry",
+	        		"stylers": [
+	        		{
+	        			"saturation": 20
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "poi.attraction",
+	        		"elementType": "all",
+	        		"stylers": [
+	        		{
+	        			"visibility": "off"
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "poi.park",
+	        		"elementType": "all",
+	        		"stylers": [
+	        		{
+	        			"visibility": "off"
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "poi.park",
+	        		"elementType": "geometry",
+	        		"stylers": [
+	        		{
+	        			"lightness": 20
+	        		},
+	        		{
+	        			"saturation": -20
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "road",
+	        		"elementType": "all",
+	        		"stylers": [
+	        		{
+	        			"visibility": "off"
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "road",
+	        		"elementType": "geometry",
+	        		"stylers": [
+	        		{
+	        			"lightness": 10
+	        		},
+	        		{
+	        			"saturation": -30
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "road",
+	        		"elementType": "geometry.fill",
+	        		"stylers": [
+	        		{
+	        			"visibility": "off"
+	        		},
+	        		{
+	        			"hue": "#ff8c00"
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "road",
+	        		"elementType": "geometry.stroke",
+	        		"stylers": [
+	        		{
+	        			"saturation": 25
+	        		},
+	        		{
+	        			"lightness": 25
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "transit",
+	        		"elementType": "all",
+	        		"stylers": [
+	        		{
+	        			"visibility": "off"
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "water",
+	        		"elementType": "all",
+	        		"stylers": [
+	        		{
+	        			"lightness": -20
+	        		}
+	        		]
+	        	},
+	        	{
+	        		"featureType": "water",
+	        		"elementType": "geometry.fill",
+	        		"stylers": [
+	        		{
+	        			"saturation": "0"
+	        		},
+	        		{
+	        			"color": "#0e406a"
+	        		}
+	        		]
+	        	}
+	        	],
+	        	{name: 'Styled Map'}
+	        );
+
+			var center;
+			if ( window.outerWidth < 600 ) {
+				center = {lat: 19.67902, lng: -155.98661};
+			} else {
+				center = {lat: 20.4, lng: -157.1};
+			}
+
+	        // Create a map object, and include the MapTypeId to add
+	        // to the map type control.
+	        var map = new google.maps.Map(document.getElementById('map'), {
+	        	center: center,
+	        	zoom: 8,
+				scrollwheel: false,
+	        	mapTypeControlOptions: {
+	        		mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
+	        		'styled_map']
+	        	}
+	        });
+
+	        var urlAtts = 'highlight=69A9BE,000000ff&scale=1.5';
+
+	        markers.push( new google.maps.Marker({
+	        	position: {lat: 19.736976, lng: -156.042938},
+	        	icon: buildIcon( '1504-airport-plane' ),
+	        	map: map,
+	        	title: 'Kona International Airport'
+	        }));
+
+	        markers.push( new google.maps.Marker({
+	        	position: {lat: 19.58091, lng: -155.98063},
+	        	icon: buildIcon( '1888-turtle' ),
+	        	map: map,
+	        	title: 'Turtle Beach (Kahaluu Park)'
+	        }));
+
+	        markers.push( new google.maps.Marker({
+	        	position: {lat: 19.47393, lng: -155.92056},
+	        	icon: buildIcon( '1779-dolphin' ),
+	        	map: map,
+	        	title: 'Swim with dolphins (Captain Cook beach)'
+	        }));
+
+	        markers.push( new google.maps.Marker({
+	        	position: {lat: 19.67902, lng: -155.98661},
+	        	icon: buildIcon( '1592-heart', 'ff0000' ),
+	        	map: map,
+	        	title: 'Villa & Wedding Site'
+	        }));
+
+	        markers.push( new google.maps.Marker({
+	        	position: {lat: 19.75428, lng: -155.4569},
+	        	icon: buildIcon( '1878-stargazing-telescope' ),
+	        	map: map,
+	        	title: 'Mauna Kea Observatory'
+	        }));
+
+	        markers.push( new google.maps.Marker({
+	        	position: {lat: 19.41936, lng: -155.28849},
+	        	icon: buildIcon( '1730-volcano' ),
+	        	map: map,
+	        	title: 'Hawaiʻi Volcanoes National Park'
+	        }));
+
+	        //Associate the styled map with the MapTypeId and set it to display.
+	        map.mapTypes.set('styled_map', styledMapType);
+	        map.setMapTypeId('styled_map');
+
+	        markers.forEach(function(marker) {
+
+	        	var infowindow = new google.maps.InfoWindow({
+	        		content: marker.title
+	        	});
+
+				marker.addListener('mouseover', function() {
+			    	infowindow.open(map, this);
+			    });
+
+				// assuming you also want to hide the infowindow when user mouses-out
+				marker.addListener('mouseout', function() {
+					infowindow.close();
+				});
+	        });
+	    }
+
+		function buildIcon( iconSlug, color = '69A9BE' ) {
+			return {
+				url: 'https://mt.google.com/vt/icon/name=icons/onion/SHARED-mymaps-container_4x.png,icons/onion/' + iconSlug + '_4x.png&highlight=' + color + ',ff000000&scale=1.5',
+			    // This marker is 20 pixels wide by 32 pixels high.
+			    size: new google.maps.Size(28, 28),
+			    scaledSize: new google.maps.Size(28, 28),
+			    // The origin for this image is (0, 0).
+			    origin: new google.maps.Point(0, 0),
+			    // The anchor for this image is the base of the flagpole at (0, 32).
+			    anchor: new google.maps.Point(14, 14)
+			}
+		}
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPSx_xtNC-hwomPzfBdMGixImxXeOFpws&callback=initMap"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    </script>
+  </body>
+</html>
